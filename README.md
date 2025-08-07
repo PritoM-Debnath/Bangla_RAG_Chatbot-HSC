@@ -35,6 +35,7 @@ or Scan <br> <br>
 ### ✅Vector database
 <img width="1412" height="511" alt="{E7F06342-E425-4A26-87C9-4EC5885A15ED}" src="https://github.com/user-attachments/assets/5e927088-3882-4cc7-bb28-6dff62609e0f" />
 
+---
 
 ## ✨ Future Work
 ✅ Implement an optimized ingestion pipeline to handle large document sets efficiently.
@@ -47,6 +48,8 @@ or Scan <br> <br>
 ✅ Allow for dynamic management of multiple knowledge bases, enabling the bot to support various subjects or books.
 ✅ Introduce a tiered subscription model based on usage, features, or number of supported documents.
 ✅ Build a user-facing analytics dashboard to track bot usage and popular queries.
+
+---
 
 ## ✉️ Contact
 Author: Pritom Debnath
