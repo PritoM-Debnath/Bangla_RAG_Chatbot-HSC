@@ -1,0 +1,233 @@
+{
+  "name": "telegram chat model",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c0ea1736-c0b3-4b6f-a07f-62b42333a5e0",
+      "name": "Telegram Trigger",
+      "webhookId": "5ca10e3c-7615-474d-b82d-02ee2e86e44b",
+      "credentials": {
+        "telegramApi": {
+          "id": "seapViU663u3hTwb",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "bangla-novel-index",
+          "mode": "list",
+          "cachedResultName": "bangla-novel-index"
+        },
+        "prompt": "={{ $json.message.text }}",
+        "topK": 1,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        336,
+        0
+      ],
+      "id": "71de21db-bf88-4cf5-a080-0f1286565e90",
+      "name": "Pinecone Vector Store",
+      "alwaysOutputData": false,
+      "credentials": {
+        "pineconeApi": {
+          "id": "K4n6MH37NlcD1fkn",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "= {{\"(context)\" + $json.document.pageContent + \"now answer the question \" + $('Telegram Trigger').item.json.message.text }}",
+        "options": {
+          "systemMessage": "You are a helpful assistant specialized in a specific Bangla novel. Your primary function is to answer user questions about the novel.\n\nHere are your core instructions:\n1.  **Answer truthfully and accurately based ONLY on the provided context.** Do not use any external knowledge. This is the most critical rule to prevent hallucinations.\n2.  **Be concise and to the point.** Do not add extra information beyond what is necessary to answer the question.\n3.  **If the provided context does not contain the answer, say \"আমি দুঃখিত, এই প্রশ্নের উত্তর আমার কাছে নেই।\" (I am sorry, I do not have the answer to this question.) and nothing else.** Do not try to guess or make things up.\n4.  **Respond in the same language as the user's query.** If the user asks in Bangla, reply in Bangla. If they ask in English, reply in English."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.1,
+      "position": [
+        752,
+        0
+      ],
+      "id": "d70a092a-f4dd-4bbb-8c76-06da9bf3a0a0",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "description": "You are a helpful assistant specialized in a specific Bangla novel. Your primary function is to answer user questions about the novel. You have access to a special tool called `think`. You should use this tool to reason through a user's question before providing a final answer.\n\nHere are your core instructions:\n1.  **Use the `think` tool before generating a final response.** The `think` tool will help you analyze the user's question and the provided context to formulate a precise answer.\n2.  **Answer truthfully and accurately based ONLY on the provided context.** Do not use any external knowledge.\n3.  **Be concise and to the point.** Do not add extra information beyond what is necessary to answer the question.\n4.  **If the provided context does not contain the answer, say \"আমি দুঃখিত, এই প্রশ্নের উত্তর আমার কাছে নেই।\" (I am sorry, I do not have the answer to this question.) and nothing else.** Do not try to guess or hallucinate.\n5.  **Respond in the same language as the user's query.** If the user asks in Bangla, reply in Bangla. If they ask in English, reply in English."
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        944,
+        -112
+      ],
+      "id": "6f3e7417-e563-4f63-8342-aa53f5dce51f",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        752,
+        160
+      ],
+      "id": "e65cc64a-df78-4d46-b89c-2bd5dd9a9c58",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "01g5FOuRgRAbvwZm",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "intfloat/multilingual-e5-large",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        336,
+        160
+      ],
+      "id": "d367bc31-cf26-4ab5-bfa7-6237a7fec9aa",
+      "name": "Embeddings HuggingFace Inference",
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "kE5KxnUOMgdldwcr",
+          "name": "HuggingFaceApi account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Telegram Trigger": [
+      {
+        "json": {
+          "update_id": 55574932,
+          "message": {
+            "message_id": 13,
+            "from": {
+              "id": 1544304571,
+              "is_bot": false,
+              "first_name": "PritoM",
+              "last_name": "Deb Nath",
+              "username": "pritom480",
+              "language_code": "en"
+            },
+            "chat": {
+              "id": 1544304571,
+              "first_name": "PritoM",
+              "last_name": "Deb Nath",
+              "username": "pritom480",
+              "type": "private"
+            },
+            "date": 1754358333,
+            "text": "অপরিচিতা গল্পের মূল নারী চরিত্রটির নাম কী?"
+          }
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Embeddings HuggingFace Inference": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "17636193-bc73-40e4-a0c8-e348e130e28f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b4a8cdeca9e4ea797c4f6f70849bb31b897ea52a7ab3f3ffeba5800b6b80a812"
+  },
+  "id": "X68Br9JgwKIYZV8c",
+  "tags": []
+}
