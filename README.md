@@ -38,16 +38,16 @@ or Scan <br> <br>
 ---
 
 ## ✨ Future Work
-✅ Implement an optimized ingestion pipeline to handle large document sets efficiently.
-✅ Add API rate-limiting and cost-management features for high-volume usage.
-✅ Transition to a scalable cloud infrastructure to support a growing user base.
-✅ Enable multi-turn conversations by adding a memory function to the AI Agent.
-✅ Integrate interactive UI elements like inline keyboard buttons in the Telegram bot.
-✅ Expand the chatbot to a web interface or other messaging platforms like WhatsApp.
-✅ Develop a system for users to upload their own documents (e.g., PDFs, DOCX files) to create custom knowledge bases.
-✅ Allow for dynamic management of multiple knowledge bases, enabling the bot to support various subjects or books.
-✅ Introduce a tiered subscription model based on usage, features, or number of supported documents.
-✅ Build a user-facing analytics dashboard to track bot usage and popular queries.
+✅ Implement an optimized ingestion pipeline to handle large document sets efficiently. <br>
+✅ Add API rate-limiting and cost-management features for high-volume usage.<br>
+✅ Transition to a scalable cloud infrastructure to support a growing user base.<br>
+✅ Enable multi-turn conversations by adding a memory function to the AI Agent.<br>
+✅ Integrate interactive UI elements like inline keyboard buttons in the Telegram bot.<br>
+✅ Expand the chatbot to a web interface or other messaging platforms like WhatsApp.<br>
+✅ Develop a system for users to upload their own documents (e.g., PDFs, DOCX files) to create custom knowledge bases.<br>
+✅ Allow for dynamic management of multiple knowledge bases, enabling the bot to support various subjects or books.<br>
+✅ Introduce a tiered subscription model based on usage, features, or number of supported documents.<br>
+✅ Build a user-facing analytics dashboard to track bot usage and popular queries.<br>
 
 ---
 
